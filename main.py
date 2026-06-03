@@ -66,7 +66,7 @@ class App(tk.Tk):
 
     # ── Layout ────────────────────────────────────────────────────────────────
     def _build(self):
-        pad = dict(padx=24, pady=0)
+        pad = dict(padx=24)
 
         # Title
         tk.Label(self, text="PDF → Black & White",
