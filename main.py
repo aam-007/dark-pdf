@@ -37,7 +37,9 @@ def make_bw(input_path: str, output_path: str, on_progress=None):
         # Render at 2× resolution for crisp output
         mat = fitz.Matrix(2, 2)
         pix = page.get_pixmap(matrix=mat, colorspace=fitz.csGRAY)
-        img_pdf = fitz.open("pdf", pix.pdfocr_tobytes())   # embed as 1-page PDF
+        img_pdf = fitz.open()
+        img_page = img_pdf.new_page(width=pix.width, height=pix.height)
+        img_page.insert_image(img_page.rect, stream=pix.tobytes("png"))
         out.insert_pdf(img_pdf)
         if on_progress:
             on_progress(i + 1, total)
